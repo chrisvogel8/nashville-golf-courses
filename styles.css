@@ -1,0 +1,19 @@
+body {
+    background-color: #f5f5f0;
+    font-family: Georgia, serif;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+nav {
+    background-color: #2c5f2e;
+    padding: 12px;
+}
+
+nav a {
+    color: #ffffff;
+}
+
+h1, h2 {
+    color: #2c5f2e;
+}
