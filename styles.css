@@ -3,17 +3,95 @@ body {
     font-family: Georgia, serif;
     max-width: 900px;
     margin: 0 auto;
+    padding: 0 20px;  /* ADDED - keeps text from touching the edges of the container */
 }
 
 nav {
     background-color: #2c5f2e;
-    padding: 12px;
+    padding: 12px 20px;     /* top/bottom 12px, left/right 20px */
+    margin-left: -20px;  /* cancels out the body padding on the left */
+    margin-right: -20px; /* cancels out the body padding on the right */
+    line-height: 2;       /* adds vertical space between wrapped lines of nav links */
 }
 
 nav a {
     color: #ffffff;
+    margin-right: 15px;  /* ADDED - puts space between each nav link so they don't feel cramped */
+}
+
+nav a:hover {
+    color: #d4edda;
+}
+
+nav a.active {
+    color: #ffffff;             /* keeps text white like other nav links */
+    font-weight: bold;          /* makes the current page link bold so it stands out */
+    border-bottom: 2px solid #d4edda; /* subtle underline to indicate current page */
+    padding-bottom: 2px;        /* tiny space between text and the underline */
+}
+
+h1 {
+    font-size: 2.5em;    /* ADDED - makes the main page title bigger and more dominant */
+    margin-bottom: 5px;  /* ADDED - tightens the gap between the h1 and whatever comes below it */
 }
 
 h1, h2 {
     color: #2c5f2e;
+}
+
+h2 {
+    margin-top: 30px;  /* ADDED - adds breathing room above each course section heading */
+}
+
+hr {
+    border: none;               /* ADDED - removes the default ugly 3D border browsers add */
+    border-top: 1px solid #c8d8c8;  /* ADDED - replaces it with a thin subtle green line */
+    margin: 20px 0;             /* ADDED - adds space above and below the line */
+}
+
+img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    margin-bottom: 20px;  /* ADDED - adds space between the image and the content below it */
+}
+
+a {
+    color: #4a7c59;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2c5f2e;
+    text-decoration: underline;
+}
+
+footer {
+    margin-top: 40px;       /* space between content and footer */
+    padding: 20px;          /* breathing room inside the footer */
+    background-color: #2c5f2e;  /* matches the nav for a consistent look */
+    color: #ffffff;         /* white text */
+    text-align: center;     /* centers everything */
+    margin-left: -20px;     /* cancels body padding like the nav */
+    margin-right: -20px;    /* cancels body padding like the nav */
+}
+
+footer a {
+    color: #d4edda;         /* light green links to stand out from white text */
+}
+
+footer a:hover {
+    color: #ffffff;         /* goes full white on hover */
+}
+
+.card {
+    background-color: #ffffff;      /* white card background against the cream page */
+    border: 1px solid #c8d8c8;      /* subtle green border matching your hr color */
+    border-radius: 6px;             /* slightly rounded corners for a modern feel */
+    padding: 20px 25px;             /* breathing room inside the card */
+    margin-bottom: 20px;            /* space between each card */
+}
+
+.card h2 {
+    margin-top: 0;                  /* removes extra space at top since card has padding */
 }
