@@ -85,15 +85,44 @@ footer a:hover {
 }
 
 .card {
-    background-color: #ffffff;      /* white card background against the cream page */
-    border: 1px solid #c8d8c8;      /* subtle green border matching your hr color */
-    border-radius: 6px;             /* slightly rounded corners for a modern feel */
-    padding: 20px 25px;             /* breathing room inside the card */
-    margin-bottom: 20px;            /* space between each card */
+    background-color: #ffffff;
+    border: 1px solid #c8d8c8;
+    border-radius: 6px;
+    padding: 20px 25px 20px 100px;  /* extra left padding for the rating sidebar */
+    margin-bottom: 20px;
+    position: relative;             /* needed to position the rating inside */
 }
 
 .card h2 {
-    margin-top: 0;                  /* removes extra space at top since card has padding */
+    margin-top: 0;
+}
+
+.card-rating {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 75px;
+    background-color: #2c5f2e;      /* dark green sidebar */
+    border-radius: 6px 0 0 6px;     /* rounds only the left corners */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.card-rating-number {
+    color: #ffffff;
+    font-size: 1.8em;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.card-rating-stars {
+    color: #c9a84c;                 /* gold stars */
+    font-size: 0.65em;
+    letter-spacing: 1px;
 }
 
 /* Homepage category cards */
