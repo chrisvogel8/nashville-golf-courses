@@ -1,9 +1,9 @@
 body {
-    background-color: #f5f5f0;
+    background: linear-gradient(160deg, #eef2e6 0%, #f5f5f0 40%, #f0ede4 100%); /* barely noticeable shift from cool green-white to warm cream */
     font-family: Georgia, serif;
     max-width: 900px;
     margin: 0 auto;
-    padding: 0 20px;  /* ADDED - keeps text from touching the edges of the container */
+    padding: 0 20px;
 }
 
 nav {
@@ -94,4 +94,147 @@ footer a:hover {
 
 .card h2 {
     margin-top: 0;                  /* removes extra space at top since card has padding */
+}
+
+/* Homepage category cards */
+.category-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.category-card {
+    flex: 1;
+    background: #1a3320;
+    border-radius: 8px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);  /* subtle lift effect on hover */
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4a9e4e, #c9a84c);  /* green to gold gradient top border */
+}
+
+.category-card h2 {
+    color: #ffffff;
+    margin: 0 0 14px 0;
+    font-size: 1.4em;
+}
+
+.category-card p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.88em;
+    line-height: 1.7;
+    margin: 0 0 24px 0;
+}
+
+.category-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #c9a84c;       /* gold color for the link */
+    text-decoration: none;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+}
+
+.category-link:hover {
+    color: #e0c070;       /* slightly lighter gold on hover */
+    text-decoration: none;
+}
+
+.category-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    color: #c9a84c;
+    border: 1px solid rgba(201,168,76,0.3);
+    font-size: 0.7em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+}
+
+.category-watermark {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 7em;
+    color: rgba(255,255,255,0.03);  /* barely visible watermark letter */
+    font-weight: bold;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* Hero section */
+.hero {
+    text-align: center;
+    padding: 30px 0 10px 0;
+}
+
+.hero h1 {
+    font-size: 2.8em;
+    letter-spacing: 4px;          /* spreads the letters out for an elegant feel */
+    text-transform: uppercase;     /* small caps style */
+    margin: 0 0 8px 0;
+}
+
+.hero p {
+    color: #6b8f6b;               /* muted green for the tagline */
+    font-style: italic;
+    font-size: 1.05em;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+}
+
+.hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin: 14px 0;
+}
+
+.hero-divider span {
+    display: block;
+    height: 1px;
+    width: 80px;
+    background-color: #2c5f2e;    /* green line on either side */
+}
+
+.hero-divider em {
+    color: #2c5f2e;
+    font-size: 1.1em;
+    font-style: normal;
+}
+
+ul {
+    list-style: none;        /* removes default bullets */
+    padding-left: 0;
+}
+
+ul li {
+    padding: 8px 0 8px 28px;     /* indent for the custom bullet */
+    position: relative;
+    border-bottom: 1px solid #e8ede8;  /* subtle divider between items */
+}
+
+ul li::before {
+    content: '⛳';           /* golf flag as the bullet */
+    position: absolute;
+    left: 0;
+    font-size: 0.85em;
 }
