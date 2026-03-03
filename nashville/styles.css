@@ -311,6 +311,12 @@ ul li::before {
         display: block;
     }
 
+    .nav-home {
+        order: 1;
+        padding: 0 16px;
+        height: 56px;
+    }
+
     .hamburger {
         display: block;
         margin-left: auto;
@@ -320,9 +326,11 @@ ul li::before {
         font-size: 1.8em;
         padding: 14px 20px;
         cursor: pointer;
-        order: 1;                   /* keeps hamburger at the top */
-        width: 100%;                /* gives it its own row */
-        text-align: right;          /* pushes the icon to the right */
+        order: 1;
+        width: auto;
+        height: 56px;
+        display: flex;
+        align-items: center;
     }
 
         body {
@@ -379,3 +387,32 @@ ul li::before {
     }
 }
 
+.nav-home {
+    color: #c9a84c;
+    font-family: Georgia, serif;
+    font-size: 0.9em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0 28px;
+    text-decoration: none;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+}
+
+.nav-home:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: stretch;
+    margin-left: auto;    /* pushes the whole group to the right */
+}
+
+.nav-home img {
+    height: 30px;
+    width: auto;
+    display: block;
+}

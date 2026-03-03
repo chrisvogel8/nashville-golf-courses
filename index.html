@@ -1,96 +1,548 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nashville Golf Courses</title>
-    <link rel="stylesheet" href="./styles.css">
+    <title>GolfMyCity — Find Golf In Your City</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #1a3320;
+            --green-mid: #2c5f2e;
+            --green-light: #4a9e4e;
+            --gold: #c9a84c;
+            --cream: #f5f5f0;
+            --cream-warm: #f0ede4;
+            --cream-cool: #eef2e6;
+            --text-dark: #1c1c1c;
+            --text-muted: #6b8f6b;
+            --border: #c8d8c8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: linear-gradient(160deg, var(--cream-cool) 0%, var(--cream) 40%, var(--cream-warm) 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--green-dark);
+            border-bottom: 3px solid var(--gold);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.2em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 18px 0;
+        }
+
+        .nav-tagline {
+            font-size: 0.72em;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.72em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 0.5s ease 0.1s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.6em, 7vw, 4.2em);
+            font-weight: 900;
+            color: var(--green-mid);
+            line-height: 1.08;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: fadeUp 0.5s ease 0.2s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-sub {
+            font-size: 1.05em;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 480px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: fadeUp 0.5s ease 0.3s forwards;
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 52px;
+            opacity: 0;
+            animation: fadeUp 0.5s ease 0.35s forwards;
+        }
+
+        .hero-divider span {
+            height: 1px;
+            width: 70px;
+            background: var(--border);
+        }
+
+        .hero-divider em {
+            font-style: normal;
+            color: var(--text-muted);
+            font-size: 1em;
+        }
+
+        /* ── CITY SECTION ── */
+        .city-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            opacity: 0;
+            animation: fadeUp 0.5s ease 0.45s forwards;
+        }
+
+        .section-label {
+            font-size: 0.68em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* ── CITY CARD ── */
+        .city-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 26px 22px 22px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .city-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(44,95,46,0.1);
+            border-color: var(--green-mid);
+        }
+
+        /* Live card */
+        .city-card.live {
+            border-color: var(--green-mid);
+            border-width: 2px;
+        }
+
+        .city-card.live::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green-mid), var(--gold));
+        }
+
+        /* Coming soon card */
+        .city-card.soon {
+            opacity: 0.5;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .city-emoji {
+            font-size: 1.6em;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .city-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--green-mid);
+            margin-bottom: 3px;
+        }
+
+        .city-card.soon .city-name { color: #aaa; }
+
+        .city-state {
+            font-size: 0.75em;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .city-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .city-badge {
+            font-size: 0.62em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .badge-live {
+            background: rgba(44,95,46,0.1);
+            color: var(--green-mid);
+            border: 1px solid rgba(44,95,46,0.2);
+        }
+
+        .badge-soon {
+            background: #f0f0f0;
+            color: #bbb;
+            border: 1px solid #e0e0e0;
+        }
+
+        .city-count {
+            font-size: 0.78em;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ── DIVIDER ── */
+        .page-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            max-width: 900px;
+            margin: 0 auto 60px;
+        }
+
+        /* ── BOTTOM STATS ── */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto 80px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            opacity: 0;
+            animation: fadeUp 0.5s ease 0.6s forwards;
+        }
+
+        .stat {
+            flex: 1;
+            text-align: center;
+            padding: 22px 16px;
+            border-right: 1px solid var(--border);
+        }
+
+        .stat:last-child { border-right: none; }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--green-mid);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.68em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--green-dark);
+            border-top: 3px solid var(--gold);
+            color: rgba(255,255,255,0.45);
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 0.82em;
+            letter-spacing: 1px;
+        }
+
+        /* ── DROPDOWN ── */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.72em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-dropdown-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .nav-dropdown-btn .arrow {
+            font-size: 0.8em;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-dropdown.open .nav-dropdown-btn .arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            min-width: 200px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            overflow: hidden;
+            z-index: 200;
+        }
+
+        .nav-dropdown.open .nav-dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-label {
+            font-size: 0.62em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            padding: 12px 16px 6px;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            text-decoration: none;
+            color: var(--green-mid);
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: background 0.15s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:hover {
+            background: var(--cream-cool);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item .item-badge {
+            font-size: 0.65em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(44,95,46,0.1);
+            color: var(--green-mid);
+            border: 1px solid rgba(44,95,46,0.2);
+            padding: 2px 7px;
+            border-radius: 3px;
+        }
+
+        .dropdown-item.soon {
+            color: #bbb;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .dropdown-item.soon .item-badge {
+            background: #f5f5f5;
+            color: #ccc;
+            border-color: #e0e0e0;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 620px) {
+            nav { padding: 0 16px; }
+            .city-grid { grid-template-columns: 1fr 1fr; }
+            .stats-row { margin: 0 20px 60px; }
+            .hero { padding: 56px 20px 40px; }
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <a href="./index.html" class="active">Home</a>
-    <a href="./public-courses/index.html">Public Courses</a>
-    <a href="./private-courses/index.html">Private Courses</a>
-    <button class="hamburger" onclick="this.parentElement.classList.toggle('open')">☰</button>
-</nav>
-    <hr />
 
-    <!-- Hero Section -->
-    <center>
-<div class="hero">
-    <div class="hero-divider">
-        <span></span>
-        <em>⛳</em>
-        <span></span>
+    <nav>
+        <a href="/" class="nav-logo">GolfMyCity</a>
+        <div class="nav-dropdown" id="cityDropdown">
+            <button class="nav-dropdown-btn" onclick="document.getElementById('cityDropdown').classList.toggle('open')">
+                Select City <span class="arrow">▾</span>
+            </button>
+            <div class="nav-dropdown-menu">
+                <div class="dropdown-label">Live Now</div>
+                <a href="/nashville/" class="dropdown-item">
+                    🎸 Nashville <span class="item-badge">● Live</span>
+                </a>
+                <div class="dropdown-label">Coming Soon</div>
+                <div class="dropdown-item soon">🎵 Memphis <span class="item-badge">Soon</span></div>
+                <div class="dropdown-item soon">🍑 Atlanta <span class="item-badge">Soon</span></div>
+                <div class="dropdown-item soon">🏈 Charlotte <span class="item-badge">Soon</span></div>
+                <div class="dropdown-item soon">🤠 Austin <span class="item-badge">Soon</span></div>
+                <div class="dropdown-item soon">⚓ Charleston <span class="item-badge">Soon</span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <p class="hero-eyebrow">Your city. Your courses.</p>
+        <h1 class="hero-title">Golf guides for<br><em>every city</em></h1>
+        <p class="hero-sub">In-depth guides to public and private golf courses, rated and reviewed by local golfers.</p>
+        <div class="hero-divider">
+            <span></span>
+            <em>⛳</em>
+            <span></span>
+        </div>
     </div>
-    <h1>Nashville Golf Courses</h1>
-    <p>Discover the finest golf experiences in Music City</p>
-    <div class="hero-divider">
-        <span></span>
-        <em>⛳</em>
-        <span></span>
+
+    <div class="city-section">
+        <p class="section-label">Browse by city</p>
+        <div class="city-grid">
+
+            <a href="/nashville/" class="city-card live">
+                <span class="city-emoji">🎸</span>
+                <div class="city-name">Nashville</div>
+                <div class="city-state">Tennessee</div>
+                <div class="city-meta">
+                    <span class="city-badge badge-live">● Live</span>
+                    <span class="city-count">8 courses</span>
+                </div>
+            </a>
+
+            <div class="city-card soon">
+                <span class="city-emoji">🎵</span>
+                <div class="city-name">Memphis</div>
+                <div class="city-state">Tennessee</div>
+                <div class="city-meta">
+                    <span class="city-badge badge-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="city-card soon">
+                <span class="city-emoji">🍑</span>
+                <div class="city-name">Atlanta</div>
+                <div class="city-state">Georgia</div>
+                <div class="city-meta">
+                    <span class="city-badge badge-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="city-card soon">
+                <span class="city-emoji">🏈</span>
+                <div class="city-name">Charlotte</div>
+                <div class="city-state">North Carolina</div>
+                <div class="city-meta">
+                    <span class="city-badge badge-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="city-card soon">
+                <span class="city-emoji">🤠</span>
+                <div class="city-name">Austin</div>
+                <div class="city-state">Texas</div>
+                <div class="city-meta">
+                    <span class="city-badge badge-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="city-card soon">
+                <span class="city-emoji">⚓</span>
+                <div class="city-name">Charleston</div>
+                <div class="city-state">South Carolina</div>
+                <div class="city-meta">
+                    <span class="city-badge badge-soon">Coming Soon</span>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <img src="./images/hermitage_golf_course.jpg" alt="Nashville Golf">
-</div>
-    </center>
 
-    <hr />
+    <hr class="page-divider" />
 
-    <!-- Intro Section -->
-    <p>Nashville is home to some of the finest golf courses in the Southeast. Whether you're a seasoned club member looking for a world-class private experience or a visitor seeking an affordable and scenic public round, Music City has a course for every golfer. Nestled among rolling Tennessee hills, scenic rivers, and lush fairways, Nashville's golf scene is as diverse and vibrant as the city itself.</p>
-
-    <hr />
-
-    <!-- Course Category Cards -->
-<div class="category-row">
-    <div class="category-card">
-        <div class="category-watermark">P</div>
-        <div class="category-badge">Open to All</div>
-        <h2>Public Courses</h2>
-        <p>Nashville's public courses offer outstanding golf for players of all skill levels and budgets. From scenic river views to championship layouts, there's a course for every golfer.</p>
-        <a class="category-link" href="./public-courses/index.html">View Public Courses →</a>
+    <div class="stats-row">
+        <div class="stat">
+            <div class="stat-num">8</div>
+            <div class="stat-label">Courses</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">1</div>
+            <div class="stat-label">City Live</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">5</div>
+            <div class="stat-label">Coming Soon</div>
+        </div>
     </div>
-    <div class="category-card">
-        <div class="category-watermark">P</div>
-        <div class="category-badge">Members Only</div>
-        <h2>Private Courses</h2>
-        <p>For those seeking an exclusive experience, Nashville's private clubs offer world-class facilities, immaculate conditions, and a rich tradition of Southern hospitality.</p>
-        <a class="category-link" href="./private-courses/index.html">View Private Courses →</a>
-    </div>
-</div>
 
-    <hr />
-
-    <!-- Why Nashville Section -->
-    <h2>Why Golf in Nashville?</h2>
-    <p>Nashville has quietly become one of the premier golf destinations in the American South. Here's why golfers keep coming back:</p>
-
-    <ul>
-        <li><strong>Year-round golf weather</strong> — mild Tennessee winters mean you can play almost any time of year</li>
-        <li><strong>World-class course design</strong> — courses designed by PGA champions and legendary architects</li>
-        <li><strong>Stunning scenery</strong> — rolling hills, river views, and lush hardwood forests make every round memorable</li>
-        <li><strong>Something for every budget</strong> — from affordable public courses to exclusive private clubs</li>
-        <li><strong>A thriving golf community</strong> — active tournaments, clinics, and events throughout the year</li>
-    </ul>
-    <hr />
-
-<h2>About Nashville Golf</h2>
-<p>Nashville has quietly emerged as one of the premier golf destinations in the American South. The city's diverse landscape — from the rolling hills of Percy Warner Park to the scenic banks of the Cumberland River — provides a stunning natural backdrop for some of the region's most celebrated courses.</p>
-
-<p>Whether you're a local resident looking for your new home course or a visitor hoping to squeeze in a round between concerts and hot chicken, Nashville's golf scene has something for everyone. With a mix of world-class private clubs and welcoming public facilities, Music City punches well above its weight as a golf destination.</p>
-
-<hr />
-
-<h2>Planning Your Round</h2>
-<p>Nashville enjoys a mild four-season climate that makes year-round golf possible. Spring and fall offer the most comfortable playing conditions, with mild temperatures and lush green fairways. Summers can be warm and humid, so early morning tee times are recommended. Winters are generally mild enough to play, though occasional frost delays are possible.</p>
-
-<hr />
-
-<h2>A City That Loves Golf</h2>
-<p>Beyond the courses themselves, Nashville's golf community is thriving. The city hosts numerous amateur tournaments, charity scrambles, and club championships throughout the year. Whether you're a scratch golfer chasing a competitive edge or a weekend warrior just looking to enjoy the outdoors, you'll find your people on the fairways of Nashville.</p>
     <footer>
-        <hr />
-        <p>&copy; 2026 Nashville Golf Courses. All rights reserved.</p>
+        &copy; 2026 GolfMyCity &nbsp;·&nbsp; All rights reserved
     </footer>
 
 </body>
