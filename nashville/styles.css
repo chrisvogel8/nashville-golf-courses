@@ -10,7 +10,7 @@ nav {
     background-color: #1a3320;          /* darker green matches the luxury cards */
     padding: 0;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     border-bottom: 3px solid #c9a84c;   /* gold accent line under the nav */
     margin-left: -20px;                 /* cancels out body padding */
     margin-right: -20px;                /* cancels out body padding */
@@ -313,7 +313,9 @@ ul li::before {
 
     .nav-home {
         order: 1;
-        padding: 0 16px;
+        flex: 1;
+        align-items: center;
+        padding: 12px 28px;
         height: 56px;
     }
 
@@ -412,7 +414,8 @@ ul li::before {
 }
 
 .nav-home img {
-    height: 30px;
-    width: auto;
-    display: block;
+    height: 36px !important;
+    width: auto !important;
+    object-fit: initial !important;
+    margin-bottom: 0 !important;
 }
