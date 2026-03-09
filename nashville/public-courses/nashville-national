@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nashville National Golf Links | Nashville Golf</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav>
+    <a href="../../" class="nav-home">
+        <img src="../images/gmc-logo-dark.svg" alt="GolfMyCity">
+    </a>
+    <a href="../index.html">Nashville</a>
+    <a href="../public-courses/index.html" class="active">Public Courses</a>
+    <a href="../private-courses/index.html">Private Courses</a>
+    <button class="hamburger" onclick="this.parentElement.classList.toggle('open')">☰</button>
+</nav>
+<hr />
+
+<h1>Nashville National Golf Links</h1>
+<img src="../images/nashville-national.jpg" alt="Nashville National Golf Links, Pleasant View TN" width="800" height="600">
+<hr />
+
+<p>Nashville National Golf Links is a hidden gem tucked among the limestone bluffs and rolling countryside northwest of Nashville. Located near Pleasant View, Tennessee, this scenic 18-hole layout is built around Sycamore Creek and features dramatic elevation changes, stunning natural beauty, and the kind of relaxed, golfer-first atmosphere that keeps players coming back round after round.</p>
+<p>The course's management takes genuine pride in their facilities, consistently upgrading the course and amenities to ensure every visit feels fresh. Nashville National describes itself as "golf the way it was intended to be played — away from the stresses of daily life in a pretty and relaxed atmosphere," and golfers who make the drive agree it lives up to that promise.</p>
+
+<h2>Highlights</h2>
+<ul>
+    <li>Dramatic limestone bluff scenery unique to Middle Tennessee</li>
+    <li>Sycamore Creek winds through the course layout</li>
+    <li>Significant natural elevation changes throughout 18 holes</li>
+    <li>Continuously improved course and facilities</li>
+    <li>Active golf leagues available throughout the season</li>
+    <li>Corporate golf outings and events accommodated</li>
+    <li>Green fees include a complimentary range bucket and cart</li>
+</ul>
+
+<h2>Course Details</h2>
+<p>Nashville National plays to a par 72 across 18 holes of championship-length golf. The layout features dramatic elevation change set among limestone bluffs — a geological feature unique to this part of Middle Tennessee — and Sycamore Creek comes into play on multiple holes, adding both visual appeal and strategic challenge. The combination of natural terrain and thoughtful routing creates a round that feels distinctly different from Nashville's flatter, riverside municipal courses.</p>
+
+<h2>Green Fees</h2>
+<p>Nashville National includes green fees, a complimentary range bucket, cart, and tax in a single all-in rate — a straightforward pricing model that golfers appreciate. The course runs one weekday rate (Monday through Thursday) and one weekend rate (Friday through Sunday). Contact the pro shop directly for current pricing, as rates are updated seasonally. No-shows will be charged 50% of the rate, so please call to cancel if your plans change.</p>
+
+<h2>The Signature Experience</h2>
+<p>What sets Nashville National apart is the combination of its natural setting and its culture. The staff here genuinely loves golf and it shows — the course is continuously improved, the pace of play is well-managed, and first-time visitors are treated like regulars from the moment they pull into the parking lot. The limestone bluff views from the elevated tee boxes are among the most dramatic of any public course in the Nashville area.</p>
+
+<h2>Amenities</h2>
+<p>Nashville National offers a full-service pro shop, driving range (included with green fee), putting green, and cart rental. The course accommodates golf leagues, corporate outings, and tournament events. Annual memberships are available for frequent players. Contact the pro shop for details on membership options and group packages.</p>
+
+<h2>Getting There</h2>
+<p>Nashville National Golf Links is located in the Pleasant View area, northwest of Nashville near Ashland City. The course is accessible from Nashville via US-41A or TN-49. Contact the pro shop for current hours and directions. Tee times can be reserved by phone or online.</p>
+
+<footer>
+    <p>&copy; 2026 GolfMyCity. All rights reserved.</p>
+</footer>
+</body>
+</html>
