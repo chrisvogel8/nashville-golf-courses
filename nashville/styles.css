@@ -16,7 +16,12 @@
 
 /* ── 1. Base & Typography ─────────────────────────────────── */
 
+html {
+    overflow-x: hidden;
+}
+
 body {
+    overflow-x: hidden;   /* prevents white space on sides */
     background: linear-gradient(160deg, #eef2e6 0%, #f5f5f0 40%, #f0ede4 100%);
     font-family: Georgia, serif;
     max-width: 900px;
@@ -309,8 +314,18 @@ footer a:hover {
 .page-city body,
 body.page-city {
     max-width: 100%;
-    padding: 0;
+    padding: 0 !important;  /* !important prevents mobile media query from overriding this */
     background: #f5f5f0;
+}
+
+/* City page — body has no padding so full-width elements don't need the 100vw trick */
+body.page-city nav,
+body.page-city .page-hero,
+body.page-city .stats-strip,
+body.page-city .cta-band,
+body.page-city footer {
+    width: 100% !important;
+    margin-left: 0 !important;
 }
 
 .page-hero {
@@ -724,4 +739,29 @@ body.page-city {
     .cta-band {
         padding: 40px 20px;
     }
+
+    /* 1. Prevent the body from allowing horizontal scroll */
+    html, body {
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* 2. Reset the "Full Width" elements to stop using Viewport Width */
+    nav, 
+    .page-hero, 
+    .stats-strip, 
+    .cta-band, 
+    footer {
+        width: 100% !important;
+        margin-left: 0 !important;
+        left: 0 !important;
+        box-sizing: border-box; /* Ensures padding doesn't add to width */
+    }
+
+    /* 3. Ensure the Hero content doesn't lean */
+    .page-hero {
+        max-width: 100%;
+        overflow: hidden;
+    }
 }
+
